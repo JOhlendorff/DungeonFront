@@ -16,7 +16,7 @@ const loggedIn = () => {
   return loggedIn;
 }
 const loginWithUser = (user, password) => {
-    const options = makeOptions("POST", false,{username: user, password: password });
+    const options = makeOptions("POST", false,{user_name: user, password: password });
     return fetch(URL + "/api/login", options)
       .then(handleHttpErrors)
       .then(res => {setToken(res.token) })
