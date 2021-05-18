@@ -8,7 +8,7 @@ import loginWithUser from "./Login";
 import logoutUser from "./Logout";
 import RedSun from "./RedSun";
 import Equipment from "./Equipment";
-import {CharacterCreate} from "./Character";
+import {CharacterCreate} from "./CharacterCreate";
 import { NavDropdown } from "react-bootstrap";
 
 const URL = "http://localhost:8080/jpareststarter";
