@@ -7,6 +7,16 @@ export function CharacterCreate() {
   return (
     <div>
       <h2>Fill the forms below to create a character:</h2>
+      {/* 
+      Name
+      Race
+      Class
+      Level
+      AC
+      Speed
+      MaxHP
+      CurrentHP
+      */}
 
 
 
