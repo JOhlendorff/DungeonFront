@@ -1,48 +1,134 @@
+import "./App.css";
+import { Link, useHistory } from "react-router-dom";
+import Nav from "./Nav";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { fetchData } from "./decodeJWT";
 import loginWithUser from "./Login";
 import logoutUser from "./Logout";
-import React, { useState, useEffect } from "react"
-import './App.css';
-import Nav from './Nav';
-import RedSun from './RedSun';
+import RedSun from "./RedSun";
+import Equipment from "./Equipment";
+import {CharacterCreate} from "./Character";
+import { NavDropdown } from "react-bootstrap";
 
 const URL = "http://localhost:8080/jpareststarter";
 
-function App() {
-  const init = { user_name: "", password: "" };
+
+function LogIn({ login }) {
+  const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
 
   const performLogin = (evt) => {
-    console.log(loginCredentials)
+    console.log(loginCredentials);
     evt.preventDefault();
-    loginWithUser(loginCredentials.user_name, loginCredentials.password);
-    // return fetch(URL + "/api/players")
-  }
-
+    login(loginCredentials.username, loginCredentials.password);
+  };
   const onChange = (evt) => {
-    setLoginCredentials({ ...loginCredentials, [evt.target.id]: evt.target.value })
-  }
+    setLoginCredentials({
+      ...loginCredentials,
+      [evt.target.id]: evt.target.value,
+    });
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
-       <h2>Welcome to the DungeonKey interface</h2>
-       <h3>Click here below to login</h3>
-       
-      <div>
-      {/* <form> */}
-      <form onChange={onChange} >
-        <input placeholder="User Name" id="user_name"></input>
-        <br></br>
-        <input placeholder="Password" type="password" id="password"></input>
-        <br></br>
+    <div>
+      <h2>Login</h2>
+      <form onChange={onChange}>
+        <input placeholder="User Name" id="username" />
+        <input placeholder="Password" type="password" id="password" />
         <button onClick={performLogin}>Login</button>
-        </form>
-      </div>
+      </form>
+    </div>
+  );
+}
+function LoggedIn() {
+  const [dataFromServer, setDataFromServer] = useState("Loading...");
 
-      </header>
+  useEffect(() => {
+    fetchData().then((data) => setDataFromServer(data.msg));
+  }, []);
+
+  return (
+    <div>
+      <h2>Data Received from server</h2>
+      <h3>{dataFromServer}</h3>
     </div>
   );
 }
 
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const history = useHistory();
+  const logout = () => {
+    // localStorage.clear();
+    // history.push("http://localhost:3000/");
+    setLoggedIn(false);
+    return <Link to="/">{logoutUser()}</Link>;
+  };
+
+  const login = (user, pass) => {
+    LoginPage();
+    loginWithUser(user, pass).then((res) => setLoggedIn(true));
+  };
+  const logoutBtn = () => {
+    return (
+      <div>
+        <p>Are you sure you want to log out?</p>
+        <Link to="/">
+          <button type="button" onClick={logout}>
+            Logout
+          </button>
+        </Link>
+      </div>
+    );
+  };
+
+  const ShowLandingPage = () => (
+    <Router>
+      <div className="App">
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/logout" component={logoutBtn} />
+          {/* <Item onClick={logout}>Logout</Item> */}
+          <Route path="/CharacterCreation" component={CharacterCreate} />
+          <Route path="/RedSun" component={RedSun} />
+          <Route path="/Equipment" component={Equipment} />
+        </Switch>
+      </div>
+    </Router>
+  );
+  function LoginPage() {
+    return !loggedIn ? (
+      <LogIn login={login} />
+    ) : (
+      <div>
+        <ShowLandingPage />
+      </div>
+    );
+  }
+
+  return (
+    <div className="App">
+      {!loggedIn ? (
+        <LogIn login={login} />
+      ) : (
+        <div>
+          <ShowLandingPage />
+        </div>
+      )}
+    </div>
+  );
+}
+
+const Home = () => (
+  <div>
+    <h1>
+      <LoggedIn />
+    </h1>
+  </div>
+);
 
 export default App;
