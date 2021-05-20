@@ -12,11 +12,12 @@ import {CharacterCreate} from "./CharacterCreate";
 import { NavDropdown } from "react-bootstrap";
 
 const URL = "http://localhost:8080/jpareststarter";
-
+let username;
 
 function LogIn({ login }) {
   const init = { username: "", password: "" };
   const [loginCredentials, setLoginCredentials] = useState(init);
+  
 
   const performLogin = (evt) => {
     console.log(loginCredentials);
@@ -28,6 +29,7 @@ function LogIn({ login }) {
       ...loginCredentials,
       [evt.target.id]: evt.target.value,
     });
+    username = loginCredentials.username;
   };
 
   return (
@@ -132,3 +134,4 @@ const Home = () => (
 );
 
 export default App;
+export {username};

@@ -6,7 +6,7 @@ export let URLQUIPMENT = 'https://www.dnd5eapi.co/api/equipment/';
 
 export let URLEP2 = 'https://api.chucknorris.io/jokes/random';
 
-export let URLCRTECHR = 'http://localhost:8080/jpareststarter/api/createcharacter';
+export let URLCRTECHR = 'http://localhost:8080/jpareststarter/api/characters/createcharacter';
 
 export const makeOptions= (method,addToken,body) =>{
     var opts = {
