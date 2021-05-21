@@ -5,9 +5,10 @@ import * as ReactBootStrap from "react-bootstrap";
 import { URLCRTECHR, makeOptions } from "./settings.js";
 import { propTypes } from "react-bootstrap/esm/Image";
 import "./App.css";
-import App, {username} from "./App.js";
+import App, { username } from "./App.js";
 
 export function CharacterCreate() {
+  var countress = 0;
   const initialValue = {
     levl: 0,
     maxHP: 0,
@@ -60,17 +61,28 @@ export function CharacterCreate() {
       race: character.race,
       classs: character.classs,
       abilityScoreDTO: character.abilityScoreDTO,
-      skillsDTO: character.skillsDTO
+      skillsDTO: character.skillsDTO,
     });
 
-    return fetch(URLCRTECHR + "/" + username, options).then(handleHttpErrors).then(resetValues);
-
+    return fetch(URLCRTECHR + "/" + username, options)
+      .then(handleHttpErrors)
+      .then(resetValues);
   };
 
-const resetValues = () => {
-setCharacter(initialValue);
-document.getElementById("levelID").value ="";
-}
+  const resetValues = () => {
+    setCharacter(initialValue);
+    document.getElementById("levelID").value = "";
+    document.getElementById("maxhpID").value = "";
+    document.getElementById("currentHPID").value = "";
+    document.getElementById("acID").value = "";
+    document.getElementById("speedID").value = "";
+    document.getElementById("nameID").value = "";
+    document.getElementById("biographyID").value = "";
+    document.getElementById("raceID").value = "";
+    document.getElementById("classID").value = "";
+    document.getElementById("characterCreatedNow").innerText =
+      "You made a character! Nice :>)";
+  };
 
   const [character, setCharacter] = useState(initialValue);
 
@@ -99,6 +111,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="maxhpID"
           type="number"
           name="maxhp"
           onChange={handleChange}
@@ -106,6 +119,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="currentHPID"
           type="number"
           name="currentHP"
           onChange={handleChange}
@@ -113,6 +127,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="acID"
           type="number"
           name="ac"
           onChange={handleChange}
@@ -120,6 +135,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="speedID"
           type="number"
           name="speed"
           onChange={handleChange}
@@ -127,6 +143,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="nameID"
           type="text"
           name="name"
           onChange={handleChange}
@@ -134,6 +151,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="biographyID"
           type="text"
           name="biography"
           onChange={handleChange}
@@ -141,6 +159,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="raceID"
           type="text"
           name="race"
           onChange={handleChange}
@@ -148,6 +167,7 @@ document.getElementById("levelID").value ="";
         />
         <br />
         <input
+          id="classID"
           type="text"
           name="classs"
           onChange={handleChange}
