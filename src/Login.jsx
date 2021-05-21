@@ -2,6 +2,9 @@ import handleHttpErrors from "./Errors"
 const URL = "http://localhost:8080/jpareststarter";
 
 
+const loginDetails = {
+  user_namer: ""
+}
 
 const getToken = () => {
   return localStorage.getItem('jwtToken')
