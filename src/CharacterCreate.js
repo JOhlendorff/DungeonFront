@@ -68,7 +68,8 @@ export function CharacterCreate() {
   };
 
 const resetValues = () => {
-
+setCharacter(initialValue);
+document.getElementById("levelID").value ="";
 }
 
   const [character, setCharacter] = useState(initialValue);
@@ -90,6 +91,7 @@ const resetValues = () => {
     <div>
       <form>
         <input
+          id="levelID"
           type="number"
           name="levl"
           onChange={handleChange}
@@ -98,7 +100,7 @@ const resetValues = () => {
         <br />
         <input
           type="number"
-          name="maxHP"
+          name="maxhp"
           onChange={handleChange}
           placeholder="Maximum Hitpoints"
         />
@@ -156,8 +158,9 @@ const resetValues = () => {
         <button onClick={createOne}>
           Create character with given parameters
         </button>
+        <div id="characterCreatedNow"></div>
       </form>
-      <p>{JSON.stringify(character)}</p>
+      {/* <p>{JSON.stringify(character)}</p> */}
     </div>
   );
 }
