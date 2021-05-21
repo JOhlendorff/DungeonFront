@@ -1,4 +1,5 @@
 import './App.css';
+import loginWithUser, {getToken, loggedIn} from './Login.jsx';
 
 export let MAINURL = 'http://localhost:8080/jpareststarter';
 export let URLQUIPMENT = 'https://www.dnd5eapi.co/api/equipment/';
@@ -16,9 +17,9 @@ export const makeOptions= (method,addToken,body) =>{
         'Accept': 'application/json',
       }
     }
-    // if (addToken && loggedIn()) {
-    //   opts.headers["x-access-token"] = getToken();
-    // }
+    if (addToken && loggedIn()) {
+      opts.headers["x-access-token"] = getToken();
+    }
     if (body) {
       opts.body = JSON.stringify(body);
     }

@@ -10,7 +10,7 @@ import App, {username} from "./App.js";
 export function CharacterCreate() {
   const initialValue = {
     levl: 0,
-    maxhp: "",
+    maxhp: 0,
     currentHP: 0,
     ac: 0,
     speed: 0,
@@ -50,7 +50,7 @@ export function CharacterCreate() {
   const createOne = () => {
     const options = makeOptions("POST", true, {
       levl: character.levl,
-      maxhp: character.maxhpm,
+      maxhp: character.maxhp,
       currentHP: character.currentHP,
       ac: character.ac,
       speed: character.speed,
@@ -91,7 +91,7 @@ export function CharacterCreate() {
         <br />
         <input
           type="number"
-          name="maxHP"
+          name="maxhp"
           onChange={handleChange}
           placeholder="Maximum Hitpoints"
         />
