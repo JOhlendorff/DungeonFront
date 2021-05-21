@@ -51,7 +51,7 @@ export function CharacterCreate() {
     e.preventDefault();
     const options = makeOptions("POST", true, {
       levl: character.levl,
-      maxHP: character.maxHP,
+      maxHP: character.maxhp,
       currentHP: character.currentHP,
       ac: character.ac,
       speed: character.speed,
@@ -62,7 +62,9 @@ export function CharacterCreate() {
       abilityScoreDTO: character.abilityScoreDTO,
       skillsDTO: character.skillsDTO
     });
+
     return fetch(URLCRTECHR + "/" + username, options).then(handleHttpErrors).then(resetValues);
+
   };
 
 const resetValues = () => {
